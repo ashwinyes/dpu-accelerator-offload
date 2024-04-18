@@ -84,10 +84,11 @@ foreach arg: warning_flags
 endforeach
 
 # Set the library version
-major_version = '24'
-minor_version = '04'
-point_version = '00'
-DAO_VERSION = major_version + '.' + minor_version + '.' + point_version
+DAO_VERSION = meson.project_version()
+version_list =  DAO_VERSION.split('.')
+major_version = version_list[0]
+minor_version = version_list[1]
+point_version = version_list[2]
 
 # Append DPDK version
 if DAO_BUILD_CONF.has('DAO_LIBDPDK_DEP')

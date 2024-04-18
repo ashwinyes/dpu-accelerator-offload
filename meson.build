@@ -5,7 +5,8 @@ project(
 	'DPU Accelerator Offloads',
 	'C',
 	meson_version: '>= 0.53.0',
-	version: '24.04.0',
+	version: run_command(find_program('cat', 'more'),
+							files('VERSION'), check: true).stdout().strip(),
 	default_options: ['warning_level=2', 'werror=true', 'buildtype=release']
 )
 
@@ -23,6 +24,10 @@ DAO_STATIC_LIBS = []
 DAO_MODULES_ENABLED = []
 DAO_MODULES_DISABLED = []
 
+
+dpdk_version = run_command(find_program('cat', 'more'),
+							files('DPDK_VERSION'), check: true).stdout().strip()
+message('Supported DPDK version: ' + dpdk_version)
 subdir('buildtools')
 subdir('dep')
 subdir('config')
