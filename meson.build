@@ -37,7 +37,9 @@ if host_machine.cpu_family() == 'aarch64'
 endif
 
 subdir('doc')
-subdir('kmod')
+if get_option('enable_kmods')
+    subdir('kmod')
+endif
 
 # Dump the enable modules status
 msg = '\n===============\nEnabled Modules\n===============\n'

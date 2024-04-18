@@ -9,3 +9,5 @@ option('virtio_debug', type: 'boolean', value: false, description:
        'Enable virtio debug.')
 option('platform', type: 'string', value: 'native', description:
        'Platform to build.')
+option('enable_kmods', type: 'boolean', value: true, description:
+       'build kernel modules')
