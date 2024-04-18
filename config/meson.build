@@ -10,12 +10,34 @@ endif
 # Compiler Configuration
 DAO_CC = meson.get_compiler('c')
 
+soc_cn9k = {
+	'machine_args': ['-mcpu=octeontx2+crc+crypto+lse']
+}
+
+soc_cn10k = {
+	'machine_args': ['-mcpu=neoverse-n2+crypto+sve2']
+}
+
+socs = {
+	'cn9k': soc_cn9k,
+	'cn10k' : soc_cn10k,
+}
+
 machine_args = []
 if meson.is_cross_build()
 	args = meson.get_cross_property('machine_args')
 	machine_args = args.split()
 else
-	machine_args = ['-march=native']
+	platform = get_option('platform')
+	if platform == ''
+		machine_args = ['-march=native']
+	else
+		soc_config = socs.get(platform, {'not_supported': true})
+		if soc_config.has_key('not_supported')
+			error('SoC @0@ not supported.'.format(platform))
+		endif
+		machine_args = soc_config['machine_args']
+	endif
 endif
 foreach ma : machine_args
 	if not DAO_CC.has_argument(ma)
