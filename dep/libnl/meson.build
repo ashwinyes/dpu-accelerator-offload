@@ -2,9 +2,9 @@
 # Copyright (c) 2023 Marvell.
 
 libnl_dep_version = []
-libnl_dep = dependency('libnl-3.0', method : 'pkg-config', version: '>=3.7.0', required:false, static:true)
-libnlroute_dep = dependency('libnl-route-3.0', method : 'pkg-config', version: '>=3.7.0', required:false, static:true)
-libnlxfrm_dep = dependency('libnl-xfrm-3.0', method : 'pkg-config', version: '>=3.7.0', required:false, static:true)
+libnl_dep = dependency('libnl-3.0', method : 'pkg-config', version: '>=3.5.0', required:false, static:true)
+libnlroute_dep = dependency('libnl-route-3.0', method : 'pkg-config', version: '>=3.5.0', required:false, static:true)
+libnlxfrm_dep = dependency('libnl-xfrm-3.0', method : 'pkg-config', version: '>=3.5.0', required:false, static:true)
 
 if not libnlroute_dep.found()
 	message('libnlroute pkgconfig not exported')
